@@ -40,5 +40,20 @@ public class PanelObjectTest {
     	Assert.assertEquals(testWidth, testPanel.getWidth());
     }
 	
+    @Test
+    public void toStringTest(){
+    	//panel parameter
+    	int testSlat = 65;
+    	String testColour = "Surfmist";
+    	int testHeight = 1000;
+    	int testWidth = 1000;
+    	//the panel under test;
+    	PanelObject testPanel = new PanelObject(testSlat, testColour, testHeight, testWidth);
+    	//test output
+    	System.out.println(testPanel.toString());
+    }
+    //test that appropraite exceptions are thrown
+    
+    //test the equals method
 	
 }

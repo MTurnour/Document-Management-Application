@@ -43,7 +43,7 @@ public class PanelCutSheet {
 	 * @throws IOException 
 	 */
 	
-	public PanelCutSheet() throws IOException{
+	public PanelCutSheet(){
 		panelCutSheetMap = new HashMap<>();
 		
 	}
@@ -61,8 +61,14 @@ public class PanelCutSheet {
 	//add in a function that returns standard item lists for jobs
 	
 	public int getQuantity(PanelObject item){
-		int copy = new Integer(panelCutSheetMap.get(item));
-		return copy;
+		if(panelCutSheetMap.get(item) == null){
+			return 0;
+		}
+		else{
+			int copy = new Integer(panelCutSheetMap.get(item));
+			return copy;
+		}
+		
 	}
 	
 	//make new panel object for the sheet
@@ -73,25 +79,55 @@ public class PanelCutSheet {
 			int currentNum = this.panelCutSheetMap.get(panelObject);
 			currentNum += 1;
 			this.panelCutSheetMap.put(panelObject, currentNum);
+			System.out.println("Panel number incremeneted");
 		}
 		else{
 			this.panelCutSheetMap.put(panelObject, 1);
+			System.out.println("New Panel Added");
 		}
 		
 	}
 	
-	public PanelObject addTestPanel() throws IOException{
-		PanelObject panelObject = new PanelObject(65, "Surfmist", 1000, 1000); 
-		return panelObject;
+	//alternate add version (add by adding panel object)
+	public void addPanel(PanelObject panel){
+		if(this.panelCutSheetMap.containsKey(panel)){
+			int currentNum = this.panelCutSheetMap.get(panel);
+			currentNum += 1;
+			this.panelCutSheetMap.put(panel, currentNum);
+			System.out.println("Panel number incremeneted");
+		}
+		else{
+			this.panelCutSheetMap.put(panel, 1);
+			System.out.println("New Panel Added");
+		}
+	}
+	//remvoe the panel object if the dictionary contains the object otherwise return a 
+	//message stating the action was attempted but had no effect
+	public void removePanel(PanelObject panel){
+		if(this.panelCutSheetMap.containsKey(panel)){
+			//if more than 1 panel qty, reduce by 1
+			if(this.panelCutSheetMap.get(panel) > 1){
+				int currentNum = this.panelCutSheetMap.get(panel);
+				currentNum -= 1;
+				this.panelCutSheetMap.put(panel, currentNum);
+				System.out.println("Panel Qty Decremented");
+			}
+			//if only one panel qty, remove panel
+			else if(this.panelCutSheetMap.get(panel) == 1){
+				this.panelCutSheetMap.remove(panel);
+				System.out.println("The panel has been removed");
+			}
+			//if 0 panel qty, throw console message
+		}else{
+			System.out.println("No such panel within the cut sheet to remove");
+		}
 	}
 	
+		
 	
+	//Add in a sorting method to return the list as a correct treemap? possibly just an equals method will do this
 	
-	
-	
-	//Add in an equals method so we can sort correctly in descending order by width
-	// sorting pattern is greatest width and then greatest height 
-	
+	//write a too string method to return the panel list
 	//@Override
     //public String toString() {
 	//	int intthing = 0;

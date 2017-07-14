@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PanelObject {
+	
+	// Correct line separator for executing machine (used in toString method)
+    private final static String LINE_SEPARATOR = System.getProperty(
+            "line.separator");
 
 		//The slat size used
 		private int slatSize;
@@ -72,6 +76,18 @@ public class PanelObject {
 			this.slatColour = slatColour;		
 		
 		}
+		
+		//write a to string method to return the panels in the desired format
+		@Override
+	    public String toString() {
+			String result = ""; // the string representation
+	        result +="Panel:  " + slatSize + " slat: " + slatColour + ", "
+			+ slatSpace + "mm Spacing " + "@ " + panelHeight + "x" + panelWidth
+			+ "mm" + LINE_SEPARATOR;
+	            //System.out.println("hey " + intthing);
+	        return result;
+	    }
+		
 		// to compare panels and thuis sort them in a list easier
 		//public boolean equals(Object object){
 			//if(!(object instanceof PanelObject)){
